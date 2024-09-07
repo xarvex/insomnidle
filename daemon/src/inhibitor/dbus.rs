@@ -41,7 +41,7 @@ impl Inhibitor for DbusInhibitor<'_> {
         if self.cookie.is_none() {
             self.cookie = Some(
                 self.proxy
-                    .inhibit("unidled", "Idle inhibitor was enabled")
+                    .inhibit("insomnidle", "Idle inhibitor was enabled")
                     .await?,
             );
             eprintln!("Inhibiting with cookie {:?}", self.cookie);

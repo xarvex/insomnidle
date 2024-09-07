@@ -8,7 +8,7 @@ authors = ["Xarvex"]
 edition = "2021"
 rust-version = "1.74.1" # cargo-msrv on 2024-06-29
 description = "Inhibit idling when playing media or by toggle"
-repository = "https://gitlab.com/xarvex/persistwd"
+repository = "https://gitlab.com/xarvex/insomnidle"
 
 [workspace.dependencies]
-unidled-ipc = { path = "ipc" }
+insomnidle-ipc = { path = "ipc" }

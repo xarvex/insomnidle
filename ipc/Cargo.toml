@@ -1,5 +1,5 @@
 [package]
-name = "unidled-ipc"
+name = "insomnidle-ipc"
 version.workspace = true
 authors.workspace = true
 edition.workspace = true

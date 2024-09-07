@@ -2,13 +2,13 @@ use std::{process::ExitCode, result};
 
 use clap::Parser;
 use inhibitor::{dbus::DbusInhibitor, Inhibitor};
+use insomnidle_ipc::IpcRequest;
 use tokio::{
     fs,
     io::{AsyncBufReadExt, AsyncReadExt},
     net::{UnixListener, UnixStream},
     signal::unix::{signal, SignalKind},
 };
-use unidled_ipc::IpcRequest;
 
 mod error;
 mod inhibitor;
@@ -23,7 +23,7 @@ struct Cli {}
 async fn quit<I: Inhibitor>(inhibitor: &mut I) -> ExitCode {
     match tokio::join!(
         inhibitor.uninhibit(),
-        fs::remove_file(unidled_ipc::socket()),
+        fs::remove_file(insomnidle_ipc::socket()),
     ) {
         (Ok(()), Ok(())) => ExitCode::SUCCESS,
         (_, _) => ExitCode::FAILURE,
@@ -78,7 +78,7 @@ async fn answer_stream<I: Inhibitor>(
 async fn main() -> ExitCode {
     let _cli = Cli::parse();
 
-    let listener = UnixListener::bind(unidled_ipc::socket()).unwrap();
+    let listener = UnixListener::bind(insomnidle_ipc::socket()).unwrap();
 
     let mut inhibitor = DbusInhibitor::new().await.unwrap();
 

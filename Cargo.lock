@@ -601,6 +601,38 @@ dependencies = [
 ]
 
 [[package]]
+name = "insomnidle"
+version = "0.0.1"
+dependencies = [
+ "anyhow",
+ "bitcode",
+ "clap",
+ "insomnidle-ipc",
+ "tokio",
+]
+
+[[package]]
+name = "insomnidle-daemon"
+version = "0.0.1"
+dependencies = [
+ "bitcode",
+ "clap",
+ "insomnidle-ipc",
+ "thiserror",
+ "tokio",
+ "toml",
+ "zbus",
+]
+
+[[package]]
+name = "insomnidle-ipc"
+version = "0.0.1"
+dependencies = [
+ "bitcode",
+ "clap",
+]
+
+[[package]]
 name = "is_terminal_polyfill"
 version = "1.70.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1133,38 +1165,6 @@ name = "unicode-ident"
 version = "1.0.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3354b9ac3fae1ff6755cb6db53683adb661634f67557942dea4facebec0fee4b"
-
-[[package]]
-name = "unidled"
-version = "0.0.1"
-dependencies = [
- "anyhow",
- "bitcode",
- "clap",
- "tokio",
- "unidled-ipc",
-]
-
-[[package]]
-name = "unidled-daemon"
-version = "0.0.1"
-dependencies = [
- "bitcode",
- "clap",
- "thiserror",
- "tokio",
- "toml",
- "unidled-ipc",
- "zbus",
-]
-
-[[package]]
-name = "unidled-ipc"
-version = "0.0.1"
-dependencies = [
- "bitcode",
- "clap",
-]
 
 [[package]]
 name = "utf8parse"

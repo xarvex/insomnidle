@@ -42,6 +42,6 @@ pub fn socket() -> &'static Path {
             Err(_) => "wayland-0".to_string(),
         };
 
-        Path::new(&format!("{runtime}/unidled-{display}.sock")).to_path_buf()
+        Path::new(&format!("{runtime}/insomnidle-{display}.sock")).to_path_buf()
     })
 }

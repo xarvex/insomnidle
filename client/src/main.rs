@@ -2,8 +2,8 @@ use std::io;
 
 use anyhow::{Context, Result};
 use clap::Parser;
+use insomnidle_ipc::IpcRequest;
 use tokio::net::UnixStream;
-use unidled_ipc::IpcRequest;
 
 #[derive(Parser)]
 #[command(author, version, about)]
@@ -35,7 +35,7 @@ async fn send_request(stream: &UnixStream, request: &IpcRequest) -> Result<()> {
 async fn main() -> Result<()> {
     let cli = Cli::parse();
 
-    let socket = unidled_ipc::socket();
+    let socket = insomnidle_ipc::socket();
     let stream = UnixStream::connect(socket)
         .await
         .with_context(|| format!("Failed connecting to daemon socket at {}", socket.display()))?;

@@ -48,7 +48,7 @@
             name = pkgs.rustPlatform.buildRustPackage rec {
               inherit (manifest) version;
 
-              pname = "unidled";
+              pname = "insomnidle";
 
               src = pkgs.lib.cleanSource ./.;
               cargoLock.lockFile = ./Cargo.lock;
