@@ -1,5 +1,6 @@
-use std::{error::Error, io};
+use std::io;
 
+use anyhow::{Context, Result};
 use clap::Parser;
 use tokio::net::UnixStream;
 use unidled_ipc::IpcRequest;
@@ -11,7 +12,7 @@ struct Cli {
     command: IpcRequest,
 }
 
-async fn send_request(stream: &UnixStream, request: &IpcRequest) -> Result<(), Box<dyn Error>> {
+async fn send_request(stream: &UnixStream, request: &IpcRequest) -> Result<()> {
     let mut buf = bitcode::encode(request);
     // Probably not ideal, if buffer has newlines.
     buf.push(b'\n');
@@ -37,12 +38,17 @@ async fn send_request(stream: &UnixStream, request: &IpcRequest) -> Result<(), B
 }
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn Error>> {
+async fn main() -> Result<()> {
     let cli = Cli::parse();
 
-    let stream = UnixStream::connect(unidled_ipc::socket()).await.unwrap();
+    let socket = unidled_ipc::socket();
+    let stream = UnixStream::connect(socket)
+        .await
+        .with_context(|| format!("Failed connecting to daemon socket at {}", socket.display()))?;
 
-    send_request(&stream, &cli.command).await?;
+    send_request(&stream, &cli.command)
+        .await
+        .context("Failed sending request to daemon")?;
 
     Ok(())
 }
