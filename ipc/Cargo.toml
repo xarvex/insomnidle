@@ -1,0 +1,15 @@
+[package]
+name = "unidled-ipc"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+description.workspace = true
+repository.workspace = true
+
+[dependencies]
+bitcode = "0.6.3"
+clap = { version = "4.5.17", features = ["derive"], optional = true }
+
+[features]
+clap = ["dep:clap"]
