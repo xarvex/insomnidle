@@ -22,15 +22,9 @@ async fn send_request(stream: &UnixStream, request: &IpcRequest) -> Result<()> {
     // Push through any `WouldBlock`.
     loop {
         match stream.try_write(&buf) {
-            Ok(_) => {
-                break;
-            }
-            Err(ref e) if e.kind() == io::ErrorKind::WouldBlock => {
-                continue;
-            }
-            Err(e) => {
-                return Err(e.into());
-            }
+            Ok(_) => break,
+            Err(ref e) if e.kind() == io::ErrorKind::WouldBlock => continue,
+            Err(e) => return Err(e.into()),
         }
     }
 
