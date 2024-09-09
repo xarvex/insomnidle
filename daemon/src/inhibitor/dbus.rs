@@ -1,6 +1,7 @@
+use anyhow::Result;
 use zbus::{proxy, Connection};
 
-use super::{Inhibitor, Result};
+use super::Inhibitor;
 
 #[proxy(
     default_service = "org.freedesktop.ScreenSaver",

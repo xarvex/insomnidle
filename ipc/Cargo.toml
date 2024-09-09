@@ -10,6 +10,7 @@ repository.workspace = true
 [dependencies]
 bitcode = "0.6.3"
 clap = { version = "4.5.17", features = ["derive"], optional = true }
+libc = "0.2.158"
 
 [features]
 clap = ["dep:clap"]

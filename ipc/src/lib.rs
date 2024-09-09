@@ -26,7 +26,10 @@ pub enum IpcResponse {
 pub fn socket() -> &'static Path {
     static PATH: OnceLock<PathBuf> = OnceLock::new();
     PATH.get_or_init(|| {
-        let runtime = env::var("XDG_RUNTIME_DIR").unwrap();
+        let runtime = env::var("XDG_RUNTIME_DIR")
+            .ok()
+            .and_then(|dir| if dir.is_empty() { None } else { Some(dir) })
+            .unwrap_or_else(|| format!("/run/user/{}", unsafe { libc::getuid() }));
 
         let display = match env::var("WAYLAND_DISPLAY") {
             Ok(wayland_socket) => {

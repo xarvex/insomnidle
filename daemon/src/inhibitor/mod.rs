@@ -1,11 +1,7 @@
-use std::result;
+use anyhow::Result;
 
 pub mod dbus;
-pub mod error;
 pub mod wayland;
-
-type Error = error::Error;
-type Result<T> = result::Result<T, Error>;
 
 pub trait Inhibitor {
     async fn inhibit(&mut self) -> Result<()>;

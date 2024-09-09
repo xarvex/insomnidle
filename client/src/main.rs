@@ -38,11 +38,11 @@ async fn main() -> Result<()> {
     let socket = insomnidle_ipc::socket();
     let stream = UnixStream::connect(socket)
         .await
-        .with_context(|| format!("Failed connecting to daemon socket at {}", socket.display()))?;
+        .with_context(|| format!("Failed connecting to socket at {}", socket.display()))?;
 
     send_request(&stream, &cli.command)
         .await
-        .context("Failed sending request to daemon")?;
+        .context("Failed sending request")?;
 
     Ok(())
 }
