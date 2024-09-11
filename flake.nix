@@ -29,6 +29,9 @@
 
   outputs =
     { flake-parts, nixpkgs, ... }@inputs:
+    let
+      inherit (nixpkgs) lib;
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ inputs.devenv.flakeModule ];
 
@@ -37,8 +40,6 @@
       perSystem =
         { pkgs, ... }:
         let
-          inherit (nixpkgs) lib;
-
           manifest = (pkgs.lib.importTOML ./Cargo.toml).workspace.package;
         in
         {
@@ -98,10 +99,7 @@
                 clippy.enable = true;
                 deadnix.enable = true;
                 flake-checker.enable = true;
-                nixfmt = {
-                  enable = true;
-                  package = pkgs.nixfmt-rfc-style;
-                };
+                nixfmt-rfc-style.enable = true;
                 rustfmt.enable = true;
                 statix.enable = true;
               };
