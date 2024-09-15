@@ -6,7 +6,7 @@ members = ["client", "daemon", "ipc"]
 version = "0.0.1"
 authors = ["Xarvex"]
 edition = "2021"
-rust-version = "1.74.1" # cargo-msrv on 2024-06-29
+rust-version = "1.76.0" # cargo-msrv on 2024-09-14
 description = "Inhibit idling when playing media or by toggle"
 repository = "https://gitlab.com/xarvex/insomnidle"
 
